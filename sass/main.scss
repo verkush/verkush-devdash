@@ -1,2 +1,26 @@
+@use "abstracts";
 @use "base";
+@use "components";
 
+:root {
+  /*Loop to apply colors and shades*/
+  @each $color, $shades in abstracts.$colors {
+    @each $shade, $value in $shades {
+      --clr-#{$color}-#{$shade}: #{$value};
+    }
+  }
+  /*Loop to apply font sizes*/
+  @each $screen-size, $font-size in base.$type-scale {
+    @if $screen-size == small {
+      @each $size, $value in $font-size {
+        --fs-#{$size}: #{$value};
+      }
+    } @else {
+      @include abstracts.mq(small) {
+        @each $size, $value in $font-size {
+          --fs-#{size}: #{$value};
+        }
+      }
+    }
+  }
+}
