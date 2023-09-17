@@ -2,3 +2,11 @@ $breakpoints: (
   small: 40em,
   medium: 65em,
 );
+
+$screen-breakpoints: (
+  "xs": 0,
+  "sm": 480px,
+  "md": 720px,
+  "lg": 960px,
+  "xl": 1200px,
+);

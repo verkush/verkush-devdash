@@ -1,26 +1,39 @@
-@use "abstracts";
-@use "base";
-@use "components";
+@use "abstracts" as *;
+@use "base" as *;
+@use "components" as *;
+@use "utilities" as *;
 
 :root {
   /*Loop to apply colors and shades*/
-  @each $color, $shades in abstracts.$colors {
+  @each $color, $shades in $colors {
     @each $shade, $value in $shades {
       --clr-#{$color}-#{$shade}: #{$value};
     }
   }
   /*Loop to apply font sizes*/
-  @each $screen-size, $font-size in base.$type-scale {
+  @each $screen-size, $font-size in $type-scale {
     @if $screen-size == small {
       @each $size, $value in $font-size {
         --fs-#{$size}: #{$value};
       }
     } @else {
-      @include abstracts.mq(small) {
+      @include mq(small) {
         @each $size, $value in $font-size {
-          --fs-#{size}: #{$value};
+          --fs-#{$size}: #{$value};
         }
       }
+    }
+  }
+}
+
+@each $color, $shades in $colors {
+  @each $shade, $value in $shades {
+    .text-#{$color}-#{$shade} {
+      color: $value;
+    }
+
+    .bg-#{$color}-#{$shade} {
+      background-color: $value;
     }
   }
 }
